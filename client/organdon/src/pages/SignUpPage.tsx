@@ -19,7 +19,7 @@ const Signup = () => {
             </div>
           </div>
         </div>
-        <Toaster className="bg-[#191919] text-[#D4D4D4]" />
+        <Toaster />
       </div>
     </div>
   );

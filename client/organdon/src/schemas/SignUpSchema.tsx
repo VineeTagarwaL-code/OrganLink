@@ -2,7 +2,7 @@ import * as z from "zod";
 
 const roleSchema = z.enum(["individual", "institution"]);
 
-export const formSchema = z.object({
+export const SignUpSchema = z.object({
   name: z.string().min(2, {
     message: "First name must be at least 2 characters.",
   }),
