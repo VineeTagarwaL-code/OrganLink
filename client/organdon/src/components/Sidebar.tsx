@@ -14,10 +14,11 @@ import {
     DialogTrigger,
 } from "./ui/dialog";
 import { RootState } from "@/utils/store";
+import { OrganDonationForm } from "./OrganDonationForm";
 
 export default function Sidebar() {
     const { user } = useSelector((state: RootState) => state.profile);
-    const isVerified = user.isVerified;
+    const isVerified = user && user?.isVerified;
     const currentPath = window.location.pathname;
     
     return (
@@ -36,6 +37,7 @@ export default function Sidebar() {
                                 <DialogHeader>
                                     <DialogTitle className="mb-10">Please enter organ details</DialogTitle>
                                 </DialogHeader>
+                                <OrganDonationForm/>
                                 <DialogFooter className="sm:justify-center">
                                 </DialogFooter>
                             </DialogContent>
@@ -64,10 +66,10 @@ export default function Sidebar() {
             <div className="flex rounded-full  items-center gap-x-3 font-bold text-lg hover:bg-[#1F2937] text-[white] w-full h-10 cursor-pointer">
                 <Avatar className="bg-red">
                     <AvatarFallback>
-                        {user?.name?.charAt(0)}
+                        {user && user?.name?.charAt(0)}
                     </AvatarFallback>
                 </Avatar>
-                <p>{user.name}</p>
+                <p>{user && user.name}</p>
             </div>
         </div>
     )

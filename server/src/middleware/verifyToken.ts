@@ -9,7 +9,7 @@ export const verifyToken = async (
   next: express.NextFunction
 ) => {
   try {
-    const token = req.header('x-access-token')?.replace('Bearer ', '')
+    const token = req.header('Authorization')?.replace('Bearer ', '')
 
     if (!token) {
       return res.status(401).json({

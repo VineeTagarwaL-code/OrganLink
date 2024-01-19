@@ -47,8 +47,6 @@ export class OrganService {
   ): Promise<ApiResponse> {
     if (
       !(
-        orgRequest.data.bloodGroup &&
-        orgRequest.data.condition &&
         orgRequest.data.organType &&
         orgRequest.data.lat &&
         orgRequest.data.lng
@@ -115,27 +113,27 @@ export class OrganService {
     return { status: 200, data: allOrgans }
   }
 
-  public async getOrganById(organId: string): Promise<ApiResponse> {
-    const organ = await Organ.findById(organId)
+  // public async getOrganById(organId: string): Promise<ApiResponse> {
+  //   const organ = await Organ.findById(organId)
 
-    if (!organ || organ.isDeleted) {
-      return { status: 400, data: { message: 'Organ not found' } }
-    }
+  //   if (!organ || organ.isDeleted) {
+  //     return { status: 400, data: { message: 'Organ not found' } }
+  //   }
 
-    return { status: 200, data: organ }
-  }
+  //   return { status: 200, data: organ }
+  // }
 
-  public async deleteOrganById(organId: string): Promise<ApiResponse> {
-    const organ = await Organ.findById(organId)
+  // public async deleteOrganById(organId: string): Promise<ApiResponse> {
+  //   const organ = await Organ.findById(organId)
 
-    if (!organ || organ.isDeleted) {
-      return { status: 400, data: { message: 'Organ not found' } }
-    }
+  //   if (!organ || organ.isDeleted) {
+  //     return { status: 400, data: { message: 'Organ not found' } }
+  //   }
 
-    await Organ.findByIdAndUpdate(organId, {
-      isDeleted: true,
-    })
+  //   await Organ.findByIdAndUpdate(organId, {
+  //     isDeleted: true,
+  //   })
 
-    return { status: 200, data: { success: true } }
-  }
+  //   return { status: 200, data: { success: true } }
+  // }
 }
