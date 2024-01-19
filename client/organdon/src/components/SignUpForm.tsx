@@ -3,8 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { SignUpSchema } from "@/schemas/SignUpSchema";
-
+import { SignUpSchema } from "@/schema/SignUpSchema";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -50,7 +49,7 @@ export function SignUpForm() {
                     disabled={isLoading}
                     placeholder="Enter your first name"
                     {...field}
-                    className="bg-[#2c2c2c]"
+                    className="bg-[#2c2c2c] border-none outline-none "
                   />
                 </FormControl>
                 <FormMessage />
@@ -65,12 +64,12 @@ export function SignUpForm() {
           render={({ field }) => {
             return (
               <FormItem className="flex flex-col items-start text-[#D4D4D4]">
-                <FormLabel>Email</FormLabel>
+                <FormLabel className="text-base text-white">Email</FormLabel>
                 <FormControl>
                   <Input
                     disabled={isLoading}
                     placeholder="abc@gmail.com"
-                    className="bg-[#2c2c2c]"
+                    className="bg-[#2c2c2c] border-none outline-none "
                     {...field}
                   />
                 </FormControl>
@@ -86,12 +85,12 @@ export function SignUpForm() {
           render={({ field }) => {
             return (
               <FormItem className="flex flex-col items-start text-[#D4D4D4]">
-                <FormLabel>Contact Number</FormLabel>
+                <FormLabel className="text-white">Contact Number</FormLabel>
                 <FormControl>
                   <Input
                     disabled={isLoading}
                     placeholder="1234567890"
-                    className="bg-[#2c2c2c]"
+                    className="bg-[#2c2c2c] border-none outline-none "
                     {...field}
                   />
                 </FormControl>
@@ -108,12 +107,12 @@ export function SignUpForm() {
           render={({ field }) => {
             return (
               <FormItem className="flex flex-col items-start text-[#D4D4D4]">
-                <FormLabel>State</FormLabel>
+                <FormLabel className="text-white">State</FormLabel>
                 <FormControl>
                   <Input
                     disabled={isLoading}
                     placeholder="West Bengal"
-                    className="bg-[#2c2c2c]"
+                    className="bg-[#2c2c2c] border-none outline-none "
                     {...field}
                   />
                 </FormControl>
@@ -123,7 +122,7 @@ export function SignUpForm() {
           }}
         />
 
-        <div className="flex justify-between w-full">
+        <div className="flex justify-between w-full gap-2">
           {/*city*/}
           <FormField
             control={form.control}
@@ -131,12 +130,12 @@ export function SignUpForm() {
             render={({ field }) => {
               return (
                 <FormItem className="flex flex-col items-start text-[#D4D4D4]">
-                  <FormLabel>City</FormLabel>
+                  <FormLabel className="text-white">City</FormLabel>
                   <FormControl>
                     <Input
                       disabled={isLoading}
                       placeholder="Kolkata"
-                      className="bg-[#2c2c2c]"
+                      className="bg-[#2c2c2c] text-white border-none outline-none "
                       {...field}
                     />
                   </FormControl>
@@ -153,13 +152,13 @@ export function SignUpForm() {
             render={({ field }) => {
               return (
                 <FormItem className="flex flex-col items-start text-[#D4D4D4]">
-                  <FormLabel>Zip code</FormLabel>
+                  <FormLabel className="text-white">Zip code</FormLabel>
                   <FormControl>
                     <Input
                       disabled={isLoading}
                       placeholder="123456"
                       {...field}
-                      className="bg-[#2c2c2c] "
+                      className="bg-[#2c2c2c] border-none outline-none "
                     />
                   </FormControl>
                   <FormMessage />
@@ -176,12 +175,12 @@ export function SignUpForm() {
           render={({ field }) => {
             return (
               <FormItem className="flex flex-col items-start text-[#D4D4D4]">
-                <FormLabel>SignUp as</FormLabel>
+                <FormLabel className="text-white">Signup As</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <FormControl className="bg-[#2c2c2c]">
+                  <FormControl className="bg-[#2c2c2c] border-none outline-none ">
                     <SelectTrigger>
                       <SelectValue placeholder="Select your role" />
                     </SelectTrigger>
