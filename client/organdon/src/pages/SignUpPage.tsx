@@ -1,6 +1,7 @@
 import { SignUpForm } from "@/components/SignUpForm";
-
+import { useNavigate } from "react-router-dom";
 const Signup = () => {
+  const navigate = useNavigate();
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center bg-background gap-y-8 md:overflow-y-hidden overflow-y-scroll">
       <div className="w-[70%] flex items-center justify-evenly pl-10">
@@ -11,7 +12,12 @@ const Signup = () => {
           <SignUpForm />
           <p>
             Already have an account ?{" "}
-            <span className="text-[#ed5757]">Log in</span>
+            <span
+              className="text-[#ed5757] cursor-pointer"
+              onClick={() => navigate("/login")}
+            >
+              Log in
+            </span>
           </p>
         </div>
         <div>
