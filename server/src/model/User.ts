@@ -18,6 +18,7 @@ const userSchema = new Schema(
     isDeleted: Boolean,
     lat: Number,
     lng: Number,
+    nabh:String
   },
   {
     timestamps: true,
