@@ -6,6 +6,7 @@ import { connectToDb } from './database/connectToDb'
 import { App as appConfig } from './config/appConfig'
 import { userRouter } from './routes/users'
 import { verifyToken } from './middleware/verifyToken'
+import { organRouter } from './routes/organs'
 
 const app = express()
 app.use(cors())
@@ -18,6 +19,7 @@ app.use('/api/v1/accounts', accountRouter)
 // authenticated routes
 app.use(verifyToken)
 app.use('/api/v1/users', userRouter)
+app.use('/api/v1/organs', organRouter)
 
 // Error handler middleware
 app.use(
