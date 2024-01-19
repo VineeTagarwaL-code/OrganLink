@@ -17,6 +17,7 @@ export type UserRegisterRequest = {
   city?: string
   zipCode?: string
   lat?: number
+  nabh?:string
   lng?: number
 }
 
@@ -24,6 +25,7 @@ export class AccountService {
   constructor() {}
 
   async registerAccount(userReq: UserRegisterRequest): Promise<ApiResponse> {
+
     try {
       if (!(userReq.name && userReq.email && userReq.role)) {
         return { status: 400, data: { message: 'Bad Request' } }
@@ -49,8 +51,10 @@ export class AccountService {
       }
 
       const randomPass = otpgen.generate(8, {})
+      console.log(userReq)
       const createdUser = await User.create({
         email: userReq.email,
+        nabh:userReq.nabh,
         name: userReq.name,
         password: crypto.createHash('md5').update(randomPass).digest('hex'),
         contact: userReq.contact,
