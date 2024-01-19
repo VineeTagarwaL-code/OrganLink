@@ -1,10 +1,12 @@
 import "./App.css";
-import { Button } from "./components/ui/button";
-
+//pages
+import Signup from "./pages/SignUpPage";
+import Login from "./pages/Login";
 function App() {
   return (
     <>
-      <Button>if you are seeing this means it worked fine</Button>
+      <Signup />
+      <Login />
     </>
   );
 }
