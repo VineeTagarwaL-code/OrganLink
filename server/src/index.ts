@@ -7,6 +7,7 @@ import { App as appConfig } from './config/appConfig'
 import { userRouter } from './routes/users'
 import { verifyToken } from './middleware/verifyToken'
 import { organRouter } from './routes/organs'
+import { fileRouter } from './routes/files'
 
 const app = express()
 app.use(cors())
@@ -20,6 +21,7 @@ app.use('/api/v1/accounts', accountRouter)
 app.use(verifyToken)
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/organs', organRouter)
+app.use('/api/v1/files', fileRouter)
 
 // Error handler middleware
 app.use(

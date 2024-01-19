@@ -19,3 +19,9 @@ export const EmailConfig = {
 export const JwtConfig = {
   key: process.env.JWT_KEY || 'ASFKJHASFJASLKFJS',
 }
+
+export const cloudinaryConfig = {
+  cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+  key: process.env.CLOUDINARY_API_KEY,
+  secret: process.env.CLOUDINARY_API_SECRET,
+}

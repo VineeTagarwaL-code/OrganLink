@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer'
-import { EmailConfig } from '../config/appConfig'
+import { v2 as cloudinary } from 'cloudinary'
+import { EmailConfig, cloudinaryConfig } from '../config/appConfig'
 
 import { ObjectId } from 'mongoose'
 
@@ -55,7 +56,7 @@ export class UtilService {
       const organDistance = this.calculation(lat1, lng1, organ.lat, organ.lng)
       return { ...organ, distance: organDistance }
     })
-  
+
     // Sort organs based on distances in ascending order
     const sortedOrgans = organsWithDistances.sort(
       (a, b) => a.distance - b.distance
@@ -66,13 +67,25 @@ export class UtilService {
     return sortedOrgans
   }
 
+  public cloudinaryConnec() {
+    try {
+      cloudinary.config({
+        cloud_name: cloudinaryConfig.cloudName,
+        api_key: cloudinaryConfig.key,
+        api_secret: cloudinaryConfig.secret,
+      })
+    } catch (error) {
+      console.log('Cloudinary connect issue:----------------> ', error)
+    }
+  }
+
   private calculation(lat1: number, lon1: number, lat2: number, lon2: number) {
     var R = 6371 // km
     var dLat = this.toRad(lat2 - lat1)
     var dLon = this.toRad(lon2 - lon1)
     var lat1 = this.toRad(lat1)
     var lat2 = this.toRad(lat2)
-  
+
     var a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2)
@@ -80,7 +93,7 @@ export class UtilService {
     var d = R * c
     return Math.floor(d)
   }
-  
+
   private toRad(deg: number) {
     return deg * (Math.PI / 180)
   }
