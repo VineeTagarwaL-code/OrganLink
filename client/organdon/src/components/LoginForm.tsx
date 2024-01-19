@@ -14,6 +14,14 @@ import {
 } from "@/components/ui/form";
 import { LoginSchema } from "@/schema/LoginSchema";
 import { Input } from "@/components/ui/input";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/utils/store";
+import { apiConnector } from "@/services/apiconnector";
+import { authEndpoints } from "@/services/apis";
+import { setUser } from "@/utils/slices/profileSlices";
+import { setToken } from "@/utils/slices/authSlice";
+import { useEffect } from "react";
 
 export function LoginForm() {
   const institutionsForm = useForm<z.infer<typeof LoginSchema>>({
@@ -21,11 +29,33 @@ export function LoginForm() {
   });
 
   const isLoading = institutionsForm.formState.isLoading;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state: RootState) => state.profile);
 
   const individualFormSubmit = async (values: z.infer<typeof LoginSchema>) => {
     const formData = { ...values };
     console.log(formData);
+    try {
+      const response = await apiConnector<{token: string, user: {name: string}}>("POST", authEndpoints.LOGIN_API, formData);
+      if (response.status == 200) {
+        const {token,user} = response.data; 
+        dispatch(setUser(user))
+        dispatch(setToken(token));
+        localStorage.setItem("OrganDonation_User", JSON.stringify(user));
+        localStorage.setItem("OrganDonToken", JSON.stringify(token));
+        setTimeout(() => {
+            navigate("/dashboard")
+        }, 5000)
+    }
+    } catch(error) {
+      console.log("error during login: ", error);
+    }
   };
+
+  useEffect(() => {
+    console.log("user: -------------> ", user);
+  }, [user])
 
   return (
     <Form {...institutionsForm}>

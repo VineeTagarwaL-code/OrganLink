@@ -23,6 +23,11 @@ import {
 } from "@/components/ui/select";
 import { apiConnector } from "@/services/apiconnector";
 import { authEndpoints } from "@/services/apis";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "@/utils/slices/profileSlices";
+import { RootState } from "@/utils/store";
+import { useEffect } from "react";
 
 export function SignUpForm() {
   const form = useForm<z.infer<typeof SignUpSchema>>({
@@ -30,13 +35,31 @@ export function SignUpForm() {
   });
 
   const isLoading = form.formState.isLoading;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state: RootState) => state.profile);
 
   async function onSubmit(values: z.infer<typeof SignUpSchema>) {
     const formData = { ...values };
     console.log("form data: ", formData);
     const response = await apiConnector("POST", authEndpoints.SIGNUP_API, formData);
     console.log("Response after signup: ", response);
+    try {
+      if (response.status == 200) {
+        localStorage.setItem("OrganDonation_User", JSON.stringify(response.data));
+        dispatch(setUser(response.data))
+        setTimeout(() => {
+            navigate("/login")
+        }, 5000)
+    }
+    } catch(error) {
+      console.log("Error during signup: ", error);
+    }
   }
+
+  useEffect(() => {
+    console.log("user: -------------> ", user);
+  }, [user])
 
   return (
     <Form {...form}>
