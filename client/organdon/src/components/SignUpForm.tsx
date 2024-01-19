@@ -1,5 +1,5 @@
 "use client";
-
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -30,6 +30,7 @@ import { RootState } from "@/utils/store";
 import { useEffect } from "react";
 
 export function SignUpForm() {
+  const [role, setRole] = useState<string>("");
   const form = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
   });
@@ -116,7 +117,7 @@ export function SignUpForm() {
                 <FormControl>
                   <Input
                     disabled={isLoading}
-                    placeholder="1234567890"
+                    placeholder="+91"
                     className="bg-[#2c2c2c] border-none outline-none "
                     {...field}
                   />
@@ -204,7 +205,11 @@ export function SignUpForm() {
               <FormItem className="flex flex-col items-start text-[#D4D4D4]">
                 <FormLabel className="text-white">Signup As</FormLabel>
                 <Select
-                  onValueChange={field.onChange}
+                  onValueChange={(selectedValue) => {
+                    console.log(selectedValue);
+                    setRole(selectedValue);
+                    field.onChange;
+                  }}
                   defaultValue={field.value}
                 >
                   <FormControl className="bg-[#2c2c2c] border-none outline-none ">
@@ -222,6 +227,28 @@ export function SignUpForm() {
             );
           }}
         />
+        {role == "institution" ? (
+          <FormField
+            control={form.control}
+            name="nabh"
+            render={({ field }) => {
+              return (
+                <FormItem className="flex flex-col items-start text-[#D4D4D4]">
+                  <FormLabel className="text-white">NABH code</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={isLoading}
+                      placeholder="0000"
+                      {...field}
+                      className="bg-[#2c2c2c] border-none outline-none "
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              );
+            }}
+          />
+        ) : null}
         <Button
           type="submit"
           className="bg-[#ed5757] font-bold w-full text-lg hover:bg-[#D4D4D4] hover:text-[#ed5757]"

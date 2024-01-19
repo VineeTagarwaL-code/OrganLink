@@ -1,9 +1,11 @@
 import { SignUpForm } from "@/components/SignUpForm";
+import AuthNav from "@/components/authNav";
 import { useNavigate } from "react-router-dom";
 const Signup = () => {
   const navigate = useNavigate();
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center bg-background gap-y-8 md:overflow-y-hidden overflow-y-scroll">
+      <AuthNav />
       <div className="w-[70%] flex items-center justify-evenly pl-10">
         <div className="flex items-center justify-center flex-col gap-10">
           <h2 className="text-white text-4xl">
