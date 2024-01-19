@@ -22,6 +22,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { apiConnector } from "@/services/apiconnector";
+import { authEndpoints } from "@/services/apis";
 
 export function SignUpForm() {
   const form = useForm<z.infer<typeof SignUpSchema>>({
@@ -30,9 +32,11 @@ export function SignUpForm() {
 
   const isLoading = form.formState.isLoading;
 
-  function onSubmit(values: z.infer<typeof SignUpSchema>) {
+  async function onSubmit(values: z.infer<typeof SignUpSchema>) {
     const formData = { ...values };
     console.log("form data: ", formData);
+    const response = await apiConnector("POST", authEndpoints.SIGNUP_API, formData);
+    console.log("Response after signup: ", response);
   }
 
   return (
