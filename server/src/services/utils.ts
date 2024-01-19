@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer'
+import { EmailConfig } from '../config/appConfig'
 
 export class UtilService {
   constructor() {}
@@ -25,5 +26,9 @@ export class UtilService {
       console.log('email sent')
       return
     })
+  }
+
+  async connectToDB(){
+    
   }
 }

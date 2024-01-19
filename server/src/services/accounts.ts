@@ -3,7 +3,10 @@ import { ApiResponse } from '../types/response.type'
 import { Role } from '../types/role.enum'
 import { emailSchema, roleSchema } from '../validation/zodValidation'
 import otpgen from 'otp-generator'
+import jwt from 'jsonwebtoken'
 import crypto from 'crypto'
+import { UtilService } from './utils'
+import { JwtConfig } from '../config/appConfig'
 
 export type UserRegisterRequest = {
   name: string
@@ -68,5 +71,27 @@ export class AccountService {
       console.error('Error occured when trying to register', error)
       return { status: 500, data: { message: 'Internal Server Error' } }
     }
+  }
+
+  public async loginUser(
+    email: string,
+    password: string
+  ): Promise<ApiResponse> {
+    if (!(email && password)) {
+      return { status: 400, data: { message: 'Bad Request' } }
+    }
+
+    const userData = await User.findOne({ email, isDeleted: false })
+
+    if (userData) {
+      const hashedPass = crypto.createHash('md5').update(password).digest('hex')
+
+      if (userData.password === hashedPass) {
+        const token = jwt.sign(userData.id, JwtConfig.key)
+        return { status: 200, data: { token, user: userData } }
+      }
+    }
+
+    return { status: 404, data: { message: 'User not found' } }
   }
 }
