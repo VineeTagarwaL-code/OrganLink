@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { LoginForm } from "@/components/LoginForm";
+import AuthNav from "@/components/authNav";
 export default function Login() {
   const navigate = useNavigate();
 
   return (
     <div className="w-screen h-screen  bg-background flex  items-center justify-center md:overflow-y-hidden overflow-y-scroll">
+      <AuthNav />
       <div className="flex items-center justify-evenly w-[65%] ">
         <div>
           <svg

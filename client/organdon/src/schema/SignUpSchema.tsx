@@ -22,4 +22,10 @@ export const SignUpSchema = z.object({
     message: "Zip code must be at least 5 characters.",
   }),
   role: roleSchema,
+  nabh: z
+    .string()
+    .refine((data) => data.length === 4, {
+      message: "The string must be exactly 4 characters long",
+    })
+    .optional(),
 });
