@@ -4,13 +4,20 @@ import bodyparser from 'body-parser'
 import { accountRouter } from './routes/accounts'
 import { connectToDb } from './database/connectToDb'
 import { App as appConfig } from './config/appConfig'
+import { userRouter } from './routes/users'
+import { verifyToken } from './middleware/verifyToken'
 
 const app = express()
 app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 app.use(bodyparser.json())
 
+// unauthenticated routes
 app.use('/api/v1/accounts', accountRouter)
+
+// authenticated routes
+app.use(verifyToken)
+app.use('/api/v1/users', userRouter)
 
 // Error handler middleware
 app.use(
