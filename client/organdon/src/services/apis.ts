@@ -1,15 +1,12 @@
 // AUTH ENDPOINTS
 export const authEndpoints = {
+  SIGNUP_API: import.meta.env.VITE_BASE_URL + "/api/v1/accounts" + "/register",
+  LOGIN_API: import.meta.env.VITE_BASE_URL + "/api/v1/accounts" + "/login",
 
-    SIGNUP_API: import.meta.env.VITE_BASE_URL + "/api/v1/accounts" + "/register",
-    LOGIN_API: import.meta.env.VITE_BASE_URL + "/api/v1/accounts" + "/login",
-
-    ADMINREQ_API: import.meta.env.VITE_BASE_URL+"/api/v1/admin" + "/requests",
-    ADMINAPPROVE_API: import.meta.env.VITE_BASE_URL+"/api/v1/admin" + "/approve"
-
-}
-
-
+  ADMINREQ_API: import.meta.env.VITE_BASE_URL + "/api/v1/admin" + "/requests",
+  ADMINAPPROVE_API:
+    import.meta.env.VITE_BASE_URL + "/api/v1/admin" + "/approve",
+};
 
 export const userEndpoints = {
   DONATE_API: import.meta.env.VITE_BASE_URL + "/api/v1/organs",
@@ -33,4 +30,3 @@ export const announcementEndpoints = {
   GET_ANNOUNCEMENTS: import.meta.env.VITE_BASE_URL + "/api/v1/announcements",
   POST_ANNOUNCEMENTS: import.meta.env.VITE_BASE_URL + "/api/v1/announcements",
 };
-

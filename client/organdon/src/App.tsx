@@ -7,22 +7,35 @@ import Admin from "./pages/admin";
 import MyOrgans from "./components/MyOrgans";
 import Announcement from "./pages/Announcement";
 
-
 import OpenRoute from "./routes/OpenRoute";
 import PrivateRoute from "./routes/ProtectedRoute";
+import Chat from "./pages/Chat";
+import Enquiries from "./pages/Enquires";
 
 function App() {
   return (
     <div className=" overflow-hidden">
       <Routes>
+        <Route path="/announcement" element={<Announcement />} />
 
-      <Route path="/announcement" element={<Announcement />} />
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute>
+              <Admin />
+            </PrivateRoute>
+          }
+        />
 
-      <Route path="/admin" element={
-        <PrivateRoute>
-          <Admin />
-        </PrivateRoute>
-      } />
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Login />
+            </PrivateRoute>
+          }
+        />
+
         <Route
           path="/signup"
           element={
@@ -47,6 +60,25 @@ function App() {
             </PrivateRoute>
           }
         />
+
+        <Route
+          path="/enquiries/:id"
+          element={
+            <PrivateRoute>
+              <Enquiries />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/chat/:id"
+          element={
+            <PrivateRoute>
+              <Chat />
+            </PrivateRoute>
+          }
+        />
+
         <Route
           path="/myorgans"
           element={
@@ -55,7 +87,6 @@ function App() {
             </PrivateRoute>
           }
         />
-
       </Routes>
     </div>
   );

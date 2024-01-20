@@ -1,14 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { LoginForm } from "@/components/LoginForm";
 import AuthNav from "@/components/authNav";
+import { Toaster } from "@/components/ui/sonner";
 export default function Login() {
   const navigate = useNavigate();
 
   return (
     <div className="w-screen h-screen  bg-background flex  items-center justify-center md:overflow-y-hidden overflow-y-scroll">
       <AuthNav />
-      <div className="flex items-center justify-evenly w-[65%] ">
-        <div>
+      <Toaster className="bg-[#191919] text-[#D4D4D4]" />
+      <div className="flex items-center justify-evenly w-[55%]  ">
+        <div className="hidden lg:block">
           <svg
             data-name="Layer 1"
             xmlns="http://www.w3.org/2000/svg"
@@ -166,12 +168,12 @@ export default function Login() {
           </svg>
         </div>
 
-        <div className=" h-[100%] flex justify-center items-center ">
+        <div className=" h-[100%] flex justify-center items-center gap-6 ">
           <div>
             <h1 className="text-4xl font-bold mb-6   text-[#D4D4D4] text-center ">
               Login to Organ<span className="text-[#ed5757]">Link</span>
             </h1>
-            <div className="w-[400px]">
+            <div className="w-[350px]">
               <LoginForm />
             </div>
             <div>

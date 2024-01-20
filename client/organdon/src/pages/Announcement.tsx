@@ -16,7 +16,7 @@ interface Announcement {
 
 export default function Announcement() {
   const [announcement, setAnnouncement] = useState<Announcement[]>([]);
-  const [announcementText, setAnnouncementText] = useState<string>(""); 
+  const [announcementText, setAnnouncementText] = useState<string>("");
   const { token } = useSelector((state: RootState) => state.auth);
   const { user } = useSelector((state: RootState) => state.profile);
 
@@ -43,7 +43,16 @@ export default function Announcement() {
     if (res.data && res.data.length > announcement.length) {
       setAnnouncement(res.data);
     }
+
+    setAnnouncementText("");
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleKeyUp = (event: any) => {
+    if (event.key === "Enter") {
+      handleSubmit();
+    }
+  };
 
   async function getAnnouncements() {
     const res = await apiConnector<Announcement[]>(
@@ -63,26 +72,32 @@ export default function Announcement() {
       <div className="hidden border-r border-slate-700 h-full md:flex md:w-72 md:flex-col md:fixed md:inset-y-0 z-[80] bg-[#0e1522]">
         <Sidebar />
       </div>
-      <div className="flex flex-col border border-red-600 h-full ml-72 justify-between">
-        {announcement && announcement.length ? (
-          <div className="flex flex-wrap">
-            {announcement.map((announcement) => (
-              <AnnouncementCard
-                key={announcement._id}
-                contact={announcement.contact}
-                email={announcement.email}
-                text={announcement.text}
-              />
-            ))}
+      <div className="flex flex-col justify-between border border-red-600 h-full ml-72 ">
+        <div>
+          <div className="border p-4 m-4 text-center rounded-lg font-bold text-2xl border-slate-700">
+            Announcements
           </div>
-        ) : (
-          <div>No announcments yet</div>
-        )}
+          {announcement && announcement.length ? (
+            <div className="flex flex-wrap">
+              {announcement.map((announcement) => (
+                <AnnouncementCard
+                  key={announcement._id}
+                  contact={announcement.contact}
+                  email={announcement.email}
+                  text={announcement.text}
+                />
+              ))}
+            </div>
+          ) : (
+            <div>No announcments yet</div>
+          )}
+        </div>
         <div className="bg-white text-black flex items-center justify-between">
           <Textarea
             placeholder={"please enter your message here"}
             className="bg-white w-full p-4"
             value={announcementText}
+            onKeyUpCapture={handleKeyUp}
             onChange={(e) => setAnnouncementText(e.target.value)}
           />
           <button className="w-1/12 h-full border" onClick={handleSubmit}>

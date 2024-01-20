@@ -2,11 +2,15 @@ import { SignUpForm } from "@/components/SignUpForm";
 import AuthNav from "@/components/authNav";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Toaster } from "@/components/ui/sonner";
 const Signup = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("Lat") == undefined || localStorage.getItem("Long") == undefined) {
+    if (
+      localStorage.getItem("Lat") == undefined ||
+      localStorage.getItem("Long") == undefined
+    ) {
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -16,9 +20,10 @@ const Signup = () => {
             localStorage.setItem("Lat", String(lat));
             localStorage.setItem("Long", String(long));
 
-            console.log(lat, long)
+            console.log(lat, long);
             console.log("position: ", position);
-          }, (error) => {
+          },
+          (error) => {
             switch (error.code) {
               case error.PERMISSION_DENIED:
                 console.error("User denied the request for location access.");
@@ -33,18 +38,19 @@ const Signup = () => {
                 console.error("Error:", error.message);
             }
           }
-        )
+        );
       }
     }
-  }, [])
-  
+  }, []);
+
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center bg-background gap-y-8 md:overflow-y-hidden overflow-y-scroll">
       <AuthNav />
-      <div className="w-[70%] flex items-center justify-evenly pl-10">
+      <Toaster className="bg-[#191919] text-[#D4D4D4]" />
+      <div className="w-[70%] flex items-center justify-evenly lg:ml-32 mt-32">
         <div className="flex items-center justify-center flex-col gap-10">
-          <h2 className="text-white text-4xl">
-            Signup To <span className="text-[#ed5757]">OrganDon</span>
+          <h2 className="text-white text-2xl lg:text-4xl">
+            Signup To <span className="text-[#ed5757]">OrganLink</span>
           </h2>
           <SignUpForm />
           <p>
@@ -57,7 +63,7 @@ const Signup = () => {
             </span>
           </p>
         </div>
-        <div>
+        <div className="hidden lg:block">
           <svg
             data-name="Layer 1"
             xmlns="http://www.w3.org/2000/svg"

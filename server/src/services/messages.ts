@@ -8,6 +8,7 @@ type Message = {
 
 export class MessageService {
   constructor() {}
+
   async sendMessage(message: {
     to: string
     from: string

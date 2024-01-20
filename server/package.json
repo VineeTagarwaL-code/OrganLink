@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "npx tsc && node ./dist/index.js",
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "vercel-build": "npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/jsonwebtoken": "^9.0.5",
+    "@types/twilio": "^3.19.3",
     "body-parser": "^1.20.2",
     "cloudinary": "^1.41.3",
     "cors": "^2.8.5",
@@ -19,7 +23,6 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.0",
-    "typescript": "^5.3.3",
     "zod": "^3.22.4"
   },
   "devDependencies": {
@@ -31,6 +34,7 @@
     "@types/otp-generator": "^4.0.2",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.8",
-    "otp-generator": "^4.0.1"
+    "otp-generator": "^4.0.1",
+    "typescript": "^5.3.3"
   }
 }
