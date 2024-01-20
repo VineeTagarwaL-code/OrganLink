@@ -162,7 +162,7 @@ const Chat = () => {
           <div className="p-4 rounded-xl text-black">{interactingUserName}</div>
         </div>
 
-        <div className="my-40 p-4 h-5/6 flex flex-col-reverse justify-end">
+        <div className="my-40 p-4 h-screen mb-40 flex flex-col-reverse justify-end">
           {messages.map((message) => (
             <div
               key={message._id}

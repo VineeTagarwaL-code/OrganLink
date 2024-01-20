@@ -34,7 +34,6 @@ const Enquiries = () => {
           "x-access-token": `Bearer ${token}`,
         }
       );
-      console.log(users);
 
       setUsers(users.data.filter((u) => u._id !== user._id));
     }, 1000);
@@ -43,6 +42,8 @@ const Enquiries = () => {
       clearInterval(interval);
     };
   }, []);
+
+  console.log(users);
 
   return (
     <div className="flex">
