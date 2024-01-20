@@ -68,7 +68,12 @@ export function SignUpForm() {
 
         await wait(2000);
         setIsLoading(false);
-        toast("Successfully signed up , redirecting ....");
+        toast("SignUp Successfull , Check your mail", {
+          action: {
+            label: "Close",
+            onClick: () => console.log("Close"),
+          },
+        });
         await wait(2000);
         navigate("/login");
       }

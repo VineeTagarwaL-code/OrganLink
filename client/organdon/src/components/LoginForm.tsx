@@ -49,7 +49,12 @@ export function LoginForm() {
         localStorage.setItem("OrganDonToken", JSON.stringify(token));
         await wait(2000);
         setIsLoading(false);
-        toast("LoggedIn  , redirecting ....");
+        toast("Login Successfull , Launching you", {
+          action: {
+            label: "Close",
+            onClick: () => console.log("Close"),
+          },
+        });
         await wait(2000);
         navigate("/dashboard");
       }
@@ -57,8 +62,6 @@ export function LoginForm() {
       console.log("error during login: ", error);
     }
   };
-
-
 
   return (
     <Form {...institutionsForm}>
