@@ -8,6 +8,9 @@ import { userRouter } from './routes/users'
 import { verifyToken } from './middleware/verifyToken'
 import { organRouter } from './routes/organs'
 import { fileRouter } from './routes/files'
+import { adminRouter } from './routes/admin'
+import { verifyIsAdmin } from './middleware/verifyIsAdmin'
+
 
 const app = express()
 app.use(cors())
@@ -22,6 +25,7 @@ app.use(verifyToken)
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/organs', organRouter)
 app.use('/api/v1/files', fileRouter)
+app.use('/api/v1/admin', verifyIsAdmin, adminRouter)
 
 // Error handler middleware
 app.use(
