@@ -32,16 +32,10 @@ export function OrganDonationForm() {
     const lat = user.lat;
     const lng = user.lng;
     const data = { ...values, lat: lat, lng: lng };
-    console.log("token:-------------> ", token);
-
-    await apiConnector(
-      "POST",
-      userEndpoints.DONATE_API,
-      { data },
-      {
-        "x-access-token": `Bearer ${token}`,
-      }
-    );
+    console.log("post request ", data);
+    await apiConnector("POST", userEndpoints.DONATE_API, data, {
+      "x-access-token": `Bearer ${token}`,
+    });
     navigate("/myorgans");
   };
 

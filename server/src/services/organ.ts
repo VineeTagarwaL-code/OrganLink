@@ -1,5 +1,4 @@
 import express from 'express'
-import { ObjectId } from 'mongoose'
 import Organ from '../model/Organ'
 import { ApiResponse } from '../types/response.type'
 import User from '../model/User'
