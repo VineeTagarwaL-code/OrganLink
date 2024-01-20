@@ -1,6 +1,8 @@
 import Announcement from '../model/Announcement'
 import User from '../model/User'
 import { ApiResponse } from '../types/response.type'
+import { TwilioService } from './twilioService'
+import { UtilService } from './utils'
 
 interface Announcement {
   from: string
@@ -25,6 +27,12 @@ export class AnnouncementService {
       email: user?.email,
     })
     console.log('Announcement crated successfully')
+
+    const twilioService = new TwilioService()
+    const res = twilioService.sendSmsToNearbyUsers(
+      announcementReq.from,
+      announcementReq.text
+    )
 
     return { status: 200, data: { message: 'Announcement created' } }
   }
