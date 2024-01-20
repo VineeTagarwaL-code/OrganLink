@@ -44,6 +44,38 @@ export class UtilService {
     })
   }
 
+  public getBoundingBox(latitude: number, longitude: number, radius: number) {
+    // Earth radius in kilometers
+    const earthRadius = 6371
+
+    // Convert latitude and longitude from degrees to radians
+    const latRad = this.toRad(latitude)
+    const lonRad = this.toRad(longitude)
+
+    // Calculate the angular distance in radians
+    const angularDistance = radius / earthRadius
+
+    // Calculate the min and max latitudes and longitudes
+    const minLat = latRad - angularDistance
+    const maxLat = latRad + angularDistance
+    const minLon = lonRad - angularDistance
+    const maxLon = lonRad + angularDistance
+
+    // Convert the results back to degrees
+    const minLatDegrees = this.toDegrees(minLat)
+    const maxLatDegrees = this.toDegrees(maxLat)
+    const minLonDegrees = this.toDegrees(minLon)
+    const maxLonDegrees = this.toDegrees(maxLon)
+
+    // Return the bounding box
+    return {
+      minLat: minLatDegrees,
+      maxLat: maxLatDegrees,
+      minLon: minLonDegrees,
+      maxLon: maxLonDegrees,
+    }
+  }
+
   public filterOrgansWithinDistance(
     userLat: number,
     userLng: number,
@@ -102,5 +134,9 @@ export class UtilService {
 
   private toRad(deg: number) {
     return deg * (Math.PI / 180)
+  }
+
+  private toDegrees(radians: number) {
+    return radians * (180 / Math.PI)
   }
 }

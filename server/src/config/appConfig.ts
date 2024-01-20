@@ -25,3 +25,11 @@ export const cloudinaryConfig = {
   key: process.env.CLOUDINARY_API_KEY,
   secret: process.env.CLOUDINARY_API_SECRET,
 }
+
+export const twilioConfig = {
+  username: process.env.TWILIO_USER,
+  password: process.env.TWILIO_PASS,
+  number: process.env.TWILIO_NUMBER,
+}
+
+export const thresholdRadiusForMessage = process.env.THRESHOLD_RADIUS || 50

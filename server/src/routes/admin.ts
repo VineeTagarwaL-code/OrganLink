@@ -1,5 +1,5 @@
 import express from 'express'
-import { AdminService } from '../controllers/adminService'
+import { AdminService } from '../services/adminService'
 
 const router = express.Router()
 
