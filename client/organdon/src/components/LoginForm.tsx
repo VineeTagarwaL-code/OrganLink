@@ -1,5 +1,5 @@
 "use client";
-
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -20,36 +20,56 @@ import { apiConnector } from "@/services/apiconnector";
 import { authEndpoints } from "@/services/apis";
 import { setUser } from "@/utils/slices/profileSlices";
 import { setToken } from "@/utils/slices/authSlice";
+<<<<<<< Updated upstream
 
+=======
+import { useEffect } from "react";
+import wait from "@/utils/wait";
+import { toast } from "sonner";
+import { ReloadIcon } from "@radix-ui/react-icons";
+>>>>>>> Stashed changes
 export function LoginForm() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const institutionsForm = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
   });
 
-  const isLoading = institutionsForm.formState.isLoading;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const individualFormSubmit = async (values: z.infer<typeof LoginSchema>) => {
+    setIsLoading(true);
     const formData = { ...values };
     console.log(formData);
     try {
-      const response = await apiConnector<{token: string, user: {name: string}}>("POST", authEndpoints.LOGIN_API, formData);
+      const response = await apiConnector<{
+        token: string;
+        user: { name: string };
+      }>("POST", authEndpoints.LOGIN_API, formData);
       if (response.status == 200) {
-        const {token,user} = response.data; 
-        dispatch(setUser(user))
+        const { token, user } = response.data;
+        dispatch(setUser(user));
         dispatch(setToken(token));
         localStorage.setItem("OrganDonation_User", JSON.stringify(user));
         localStorage.setItem("OrganDonToken", JSON.stringify(token));
-        setTimeout(() => {
-            navigate("/dashboard")
-        }, 5000)
-    }
-    } catch(error) {
+        await wait(2000);
+        setIsLoading(false);
+        toast("LoggedIn  , redirecting ....");
+        await wait(2000);
+        navigate("/dashboard");
+      }
+    } catch (error) {
       console.log("error during login: ", error);
     }
   };
 
+<<<<<<< Updated upstream
+=======
+  useEffect(() => {
+    console.log("user: -------------> ", user);
+  }, [user]);
+
+>>>>>>> Stashed changes
   return (
     <Form {...institutionsForm}>
       <form
@@ -98,12 +118,22 @@ export function LoginForm() {
           }}
         />
 
-        <Button
-          type="submit"
-          className="bg-[#ed5757] font-bold w-full text-lg hover:bg-[#D4D4D4] hover:text-[#ed5757]"
-        >
-          Login
-        </Button>
+        {isLoading ? (
+          <Button
+            disabled
+            className="bg-[#ed5757] font-bold w-full text-lg hover:bg-[#D4D4D4] hover:text-[#ed5757]"
+          >
+            <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+            Please wait
+          </Button>
+        ) : (
+          <Button
+            type="submit"
+            className="bg-[#ed5757] font-bold w-full text-lg hover:bg-[#D4D4D4] hover:text-[#ed5757]"
+          >
+            Login
+          </Button>
+        )}
       </form>
     </Form>
   );

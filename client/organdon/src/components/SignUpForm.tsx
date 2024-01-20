@@ -28,39 +28,58 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/utils/slices/profileSlices";
 import { RootState } from "@/utils/store";
 import { useEffect } from "react";
+import wait from "@/utils/wait";
+import { toast } from "sonner";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 export function SignUpForm() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [role, setRole] = useState<string>("");
   const form = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
   });
 
-  const isLoading = form.formState.isLoading;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state.profile);
 
   async function onSubmit(values: z.infer<typeof SignUpSchema>) {
-    const formData = { ...values, lat: localStorage.getItem("Lat"), lng: localStorage.getItem("Long") };
+    setIsLoading(true);
+    const formData = {
+      ...values,
+      lat: localStorage.getItem("Lat"),
+      lng: localStorage.getItem("Long"),
+    };
     console.log("form data: ", formData);
-    const response = await apiConnector("POST", authEndpoints.SIGNUP_API, formData);
+    const response = await apiConnector(
+      "POST",
+      authEndpoints.SIGNUP_API,
+      formData
+    );
     console.log("Response after signup: ", response);
+
     try {
       if (response.status == 200) {
-        localStorage.setItem("OrganDonation_User", JSON.stringify(response.data));
-        dispatch(setUser(response.data))
-        setTimeout(() => {
-            navigate("/login")
-        }, 5000)
-    }
-    } catch(error) {
+        localStorage.setItem(
+          "OrganDonation_User",
+          JSON.stringify(response.data)
+        );
+        dispatch(setUser(response.data));
+
+        await wait(2000);
+        setIsLoading(false);
+        toast("Successfully signed up , redirecting ....");
+        await wait(2000);
+        navigate("/login");
+      }
+    } catch (error) {
       console.log("Error during signup: ", error);
     }
   }
 
   useEffect(() => {
     console.log("user: -------------> ", user);
-  }, [user])
+  }, [user]);
 
   return (
     <Form {...form}>
@@ -249,12 +268,22 @@ export function SignUpForm() {
             }}
           />
         ) : null}
-        <Button
-          type="submit"
-          className="bg-[#ed5757] font-bold w-full text-lg hover:bg-[#D4D4D4] hover:text-[#ed5757]"
-        >
-          Create account
-        </Button>
+        {isLoading ? (
+          <Button
+            disabled
+            className="bg-[#ed5757] font-bold w-full text-lg hover:bg-[#D4D4D4] hover:text-[#ed5757]"
+          >
+            <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+            Please wait
+          </Button>
+        ) : (
+          <Button
+            type="submit"
+            className="bg-[#ed5757] font-bold w-full text-lg hover:bg-[#D4D4D4] hover:text-[#ed5757]"
+          >
+            Create account
+          </Button>
+        )}
       </form>
     </Form>
   );
