@@ -104,7 +104,7 @@ const OrganCard = ({
             {showEdit && (
               <div>
                 <button
-                  className="bg-green-400 mx-2 p-2 rounded-xl"
+                  className="bg-green-400 mx-2 p-2 rounded-xl text-black"
                   onClick={() => navigate("/enquiries/" + _id)}
                 >
                   Enquiries
@@ -114,27 +114,28 @@ const OrganCard = ({
 
             {showEdit && (
               <DropdownMenu>
-              <DropdownMenuTrigger><PiDotsThreeOutlineVerticalFill/></DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem>Update</DropdownMenuItem>
-                <DropdownMenuItem>Unlist</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            
+                <DropdownMenuTrigger>
+                  <PiDotsThreeOutlineVerticalFill />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Update</DropdownMenuItem>
+                  <DropdownMenuItem>Unlist</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+
+            {!showEdit && (
+              <div className="bg-green-400 mx-2 p-2 rounded-xl">
+                <button
+                  className="w-full rounded-xl text-black p-2"
+                  onClick={handleChat}
+                >
+                  Chat
+                </button>
+              </div>
             )}
           </div>
         </div>
-
-        {!showEdit && (
-          <div className="flex flex-col ml-2 mt-8 w-1/2 ">
-            <button
-              className="w-full rounded-xl bg-blue-300 text-black p-2"
-              onClick={handleChat}
-            >
-              Chat
-            </button>
-          </div>
-        )}
       </Card>
     </div>
   );

@@ -214,7 +214,7 @@ export default function Dashboard() {
                     _id={organ._id}
                     organType={organ.organType}
                     createdAt={organ.createdAt}
-                    showEdit={true}
+                    showEdit={false}
                   />
                 </div>
               ))}

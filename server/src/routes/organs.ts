@@ -22,6 +22,24 @@ const isVerifiedInstitute = async (
   next()
 }
 
+router.get(
+  '/one/:id',
+  async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    try {
+      const organService = new OrganService(req)
+      const organId = req.params.id
+      const organDonationResponse = await organService.getOrganById(organId)
+      res.status(organDonationResponse.status).send(organDonationResponse.data)
+    } catch (err) {
+      return next(err)
+    }
+  }
+)
+
 router.post(
   '/',
   isVerifiedInstitute,
@@ -70,8 +88,8 @@ router.get(
     next: express.NextFunction
   ) => {
     try {
-      const organService = new OrganService(req);
-      console.log("Before organ donation:--------------------> ");
+      const organService = new OrganService(req)
+      console.log('Before organ donation:--------------------> ')
       const organDonationResponse = await organService.getAllOrgans()
       res.status(organDonationResponse.status).send(organDonationResponse.data)
     } catch (err) {

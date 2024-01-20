@@ -76,9 +76,19 @@ export class OrganService {
     return { status: 200, data: hospitalOrgans }
   }
 
+  public async getOrganById(organId: string): Promise<ApiResponse> {
+    const organ = await Organ.findById(organId)
+
+    if (!organ || organ.isDeleted) {
+      return { status: 400, data: { message: 'Organ not found' } }
+    }
+
+    return { status: 200, data: organ }
+  }
+
   public async getAllOrgans() {
     const allOrgans = await Organ.find({ isDeleted: false })
-    console.log("all organs: --------------------------> ", allOrgans);
+    console.log('all organs: --------------------------> ', allOrgans)
     return { status: 200, data: allOrgans }
   }
 }
