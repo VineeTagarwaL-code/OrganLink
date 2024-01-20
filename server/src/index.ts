@@ -32,7 +32,6 @@ app.use('/api/v1/admin', verifyIsAdmin, adminRouter)
 app.use('/api/v1/messages', messageRouter)
 app.use('/api/v1/announcements', announcementRouter)
 
-
 // Error handler middleware
 app.use(
   (
@@ -42,6 +41,7 @@ app.use(
     next: express.NextFunction
   ) => {
     if (error) {
+      console.log(error)
       res.status(500).send({ error: 'Internal Server Error' })
     }
   }

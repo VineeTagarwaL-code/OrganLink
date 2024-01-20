@@ -108,10 +108,9 @@ router.post(
     try {
       const organService = new OrganService(req)
       const response = await organService.filterOrgan(
+        res.locals.user.id,
         req.body.distance,
-        req.body.organType,
-        req.body.bloodGroup,
-        res.locals.user.id
+        req.body.organType
       )
       if (!response) {
         console.log('Organ can not fetch according filters')

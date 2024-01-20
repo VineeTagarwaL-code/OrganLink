@@ -8,9 +8,6 @@ export interface OrganTypes {
   _id: ObjectId
   organType: string
   instituteId: ObjectId
-  bloodGroup: string
-  condition: string
-  certification: any[]
   isDeleted: boolean
   lat: number
   lng: number
@@ -47,23 +44,32 @@ export class UtilService {
     })
   }
 
-  public getDistanceFromLatLonInKm(
-    lat1: number,
-    lng1: number,
-    filterOrgans: OrganTypes[]
+  public filterOrgansWithinDistance(
+    userLat: number,
+    userLng: number,
+    distance: number,
+    allOrgans: any
   ) {
-    const organsWithDistances = filterOrgans.map(organ => {
-      const organDistance = this.calculation(lat1, lng1, organ.lat, organ.lng)
-      return { ...organ, distance: organDistance }
-    })
+    const organsWithInDistance = []
+
+    for (let i = 0; i < allOrgans.length; i++) {
+      const orgDistance = this.calculation(
+        allOrgans[i].lat,
+        allOrgans[i].lng,
+        userLat,
+        userLng
+      )
+
+      if (orgDistance <= distance) {
+        organsWithInDistance.push({ ...allOrgans[i], distance: orgDistance })
+      }
+    }
 
     // Sort organs based on distances in ascending order
-    const sortedOrgans = organsWithDistances.sort(
+    const sortedOrgans = organsWithInDistance.sort(
       (a, b) => a.distance - b.distance
     )
-    sortedOrgans.map(organ => console.log(organ.distance))
 
-    // Return the sorted organs array
     return sortedOrgans
   }
 

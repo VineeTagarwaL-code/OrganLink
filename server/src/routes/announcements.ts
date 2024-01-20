@@ -32,4 +32,17 @@ router.get(
   }
 )
 
+router.delete(
+  '/:id',
+  async (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    const announcementService = new AnnouncementService()
+    await announcementService.deleteAnnouncements(req.params.id)
+    return { status: 200, data: 'Organ deleted successfully' }
+  }
+)
+
 export const announcementRouter = router

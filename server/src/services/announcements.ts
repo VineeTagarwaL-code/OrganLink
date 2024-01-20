@@ -33,4 +33,14 @@ export class AnnouncementService {
     const allAnnouncements = await Announcement.find({}).sort({ timeStamp: -1 })
     return { status: 200, data: allAnnouncements }
   }
+
+  public async deleteAnnouncements(
+    announcementId: string
+  ): Promise<ApiResponse> {
+    const deletedOrganResponse = await Announcement.deleteOne({
+      _id: announcementId,
+    })
+    console.log(deletedOrganResponse)
+    return { status: 200, data: { message: 'deleted successfully ' } }
+  }
 }
