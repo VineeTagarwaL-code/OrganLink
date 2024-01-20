@@ -90,7 +90,7 @@ const OrganCard = ({
                 {organType[0].toUpperCase() +
                   organType.slice(1).toLocaleLowerCase()}
               </p>
-              <p className="text-[14px] hover:text-zinc-400">
+              <p className="text-[12px] text-zinc-400">
                 {calculateDaysDifference(createdAt) > 0 ? (
                   <p>{calculateDaysDifference(createdAt)} days ago</p>
                 ) : (
@@ -104,7 +104,7 @@ const OrganCard = ({
             {showEdit && (
               <div>
                 <button
-                  className="bg-green-400 mx-2 p-2 rounded-xl text-black"
+                  className="bg-green-700/10 text-green-700 mx-2 p-2 rounded-xl"
                   onClick={() => navigate("/enquiries/" + _id)}
                 >
                   Enquiries
@@ -114,10 +114,10 @@ const OrganCard = ({
 
             {showEdit && (
               <DropdownMenu>
-                <DropdownMenuTrigger>
+                <DropdownMenuTrigger className="border border-pink-400">
                   <PiDotsThreeOutlineVerticalFill />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
+                <DropdownMenuContent className="bg-[#0E1522] border border-white/20 pt-2">
                   <DropdownMenuItem>Update</DropdownMenuItem>
                   <DropdownMenuItem>Unlist</DropdownMenuItem>
                 </DropdownMenuContent>
