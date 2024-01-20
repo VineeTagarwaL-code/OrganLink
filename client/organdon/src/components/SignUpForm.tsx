@@ -41,7 +41,7 @@ export function SignUpForm() {
   const { user } = useSelector((state: RootState) => state.profile);
 
   async function onSubmit(values: z.infer<typeof SignUpSchema>) {
-    const formData = { ...values };
+    const formData = { ...values, lat: localStorage.getItem("Lat"), lng: localStorage.getItem("Long") };
     console.log("form data: ", formData);
     const response = await apiConnector("POST", authEndpoints.SIGNUP_API, formData);
     console.log("Response after signup: ", response);

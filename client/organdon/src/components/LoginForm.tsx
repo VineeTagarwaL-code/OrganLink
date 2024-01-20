@@ -15,13 +15,11 @@ import {
 import { LoginSchema } from "@/schema/LoginSchema";
 import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/utils/store";
+import { useDispatch } from "react-redux";
 import { apiConnector } from "@/services/apiconnector";
 import { authEndpoints } from "@/services/apis";
 import { setUser } from "@/utils/slices/profileSlices";
 import { setToken } from "@/utils/slices/authSlice";
-import { useEffect } from "react";
 
 export function LoginForm() {
   const institutionsForm = useForm<z.infer<typeof LoginSchema>>({
@@ -31,7 +29,6 @@ export function LoginForm() {
   const isLoading = institutionsForm.formState.isLoading;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useSelector((state: RootState) => state.profile);
 
   const individualFormSubmit = async (values: z.infer<typeof LoginSchema>) => {
     const formData = { ...values };
@@ -52,10 +49,6 @@ export function LoginForm() {
       console.log("error during login: ", error);
     }
   };
-
-  useEffect(() => {
-    console.log("user: -------------> ", user);
-  }, [user])
 
   return (
     <Form {...institutionsForm}>

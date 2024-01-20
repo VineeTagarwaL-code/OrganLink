@@ -4,89 +4,54 @@ import Organ from '../model/Organ'
 import { ApiResponse } from '../types/response.type'
 import User from '../model/User'
 import { UtilService } from './utils'
-
-interface OrganTypes {
-  _id: ObjectId
-  organType: string
-  instituteId: ObjectId
-  bloodGroup: string
-  condition: string
-  certification: any[]
-  isDeleted: boolean
-  lat: number
-  lng: number
-  createdAt: string
-  updatedAt: string
-  __v: number
-  distance?: number
-}
-
-type OrganDonationRequest = {
-  data: {
-    organType: 'heart' | 'lungs' | 'kidney' | 'liver'
-    bloodGroup: string
-    condition: string
-    lat: string
-    lng: string
-  }
-  certification?: string[]
-}
+import { OrganType } from '../types/organ.type'
 
 type OrganQueryRequest = {
-  organType?: string
-  bloodGroup?: string
-  condition?: string
+  organType: string
+  lat: number
+  lng: number
+}
+
+type Organ = {
+  organType: string
+  lat: number
+  lng: number
+  isDeleted: boolean
 }
 
 export class OrganService {
   constructor(req: express.Request) {}
 
   public async register(
-    orgRequest: OrganDonationRequest,
+    orgRequest: OrganQueryRequest,
     instituteId: string
   ): Promise<ApiResponse> {
-    if (
-      !(
-        orgRequest.data.bloodGroup &&
-        orgRequest.data.condition &&
-        orgRequest.data.organType &&
-        orgRequest.data.lat &&
-        orgRequest.data.lng
-      )
-    ) {
+    if (!(orgRequest.organType && orgRequest.lat && orgRequest.lng)) {
       return { status: 400, data: { message: 'Bad Request' } }
     }
 
     const organData = {
-      ...orgRequest.data,
-      ...orgRequest.certification,
+      ...orgRequest,
       instituteId,
       isDeleted: false,
     }
-    console.log('organ creating... ', organData)
+
     const createdOrgan = await Organ.create(organData)
     return { status: 200, data: createdOrgan }
   }
 
   public async filterOrgan(
-    distance: boolean,
-    organType: string,
-    bloodGroup: string,
-    id: string
+    id: string,
+    distance?: number,
+    organType?: OrganType
   ) {
-    console.log('distance: ')
-    const queryObject: OrganQueryRequest = {}
-
-    if (bloodGroup) {
-      queryObject.bloodGroup = bloodGroup
-    }
+    const queryObject: { organType?: OrganType } = {}
 
     if (organType) {
-      queryObject.organType = organType.toLowerCase()
+      queryObject.organType = organType
     }
-    console.log('queryObject: ', queryObject)
 
-    const response: OrganTypes[] = await Organ.find(queryObject).lean()
+    const response = await Organ.find(queryObject).lean()
     let shortestOrgans
 
     // find latitude and longitude of current user
@@ -95,11 +60,13 @@ export class OrganService {
     // return short distance organs
     if (distance && user?.lat && user?.lng) {
       const utilServce = new UtilService()
-      shortestOrgans = utilServce.getDistanceFromLatLonInKm(
+      shortestOrgans = utilServce.filterOrgansWithinDistance(
         user?.lat,
         user?.lng,
+        distance,
         response
       )
+
       return { status: 200, data: shortestOrgans }
     }
     return { status: 200, data: response }
@@ -112,30 +79,7 @@ export class OrganService {
 
   public async getAllOrgans() {
     const allOrgans = await Organ.find({ isDeleted: false })
+    console.log("all organs: --------------------------> ", allOrgans);
     return { status: 200, data: allOrgans }
-  }
-
-  public async getOrganById(organId: string): Promise<ApiResponse> {
-    const organ = await Organ.findById(organId)
-
-    if (!organ || organ.isDeleted) {
-      return { status: 400, data: { message: 'Organ not found' } }
-    }
-
-    return { status: 200, data: organ }
-  }
-
-  public async deleteOrganById(organId: string): Promise<ApiResponse> {
-    const organ = await Organ.findById(organId)
-
-    if (!organ || organ.isDeleted) {
-      return { status: 400, data: { message: 'Organ not found' } }
-    }
-
-    await Organ.findByIdAndUpdate(organId, {
-      isDeleted: true,
-    })
-
-    return { status: 200, data: { success: true } }
   }
 }

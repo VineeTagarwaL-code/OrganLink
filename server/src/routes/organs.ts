@@ -70,7 +70,8 @@ router.get(
     next: express.NextFunction
   ) => {
     try {
-      const organService = new OrganService(req)
+      const organService = new OrganService(req);
+      console.log("Before organ donation:--------------------> ");
       const organDonationResponse = await organService.getAllOrgans()
       res.status(organDonationResponse.status).send(organDonationResponse.data)
     } catch (err) {
@@ -79,24 +80,24 @@ router.get(
   }
 )
 
-router.get(
-  '/one/:id',
-  async (
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) => {
-    try {
-      console.log('check check chekc ')
-      const organService = new OrganService(req)
-      const organId = req.params.id
-      const organDonationResponse = await organService.getOrganById(organId)
-      res.status(organDonationResponse.status).send(organDonationResponse.data)
-    } catch (err) {
-      return next(err)
-    }
-  }
-)
+// router.get(
+//   '/one/:id',
+//   async (
+//     req: express.Request,
+//     res: express.Response,
+//     next: express.NextFunction
+//   ) => {
+//     try {
+//       console.log('check check chekc ')
+//       const organService = new OrganService(req)
+//       const organId = req.params.id
+//       const organDonationResponse = await organService.getOrganById(organId)
+//       res.status(organDonationResponse.status).send(organDonationResponse.data)
+//     } catch (err) {
+//       return next(err)
+//     }
+//   }
+// )
 
 router.post(
   '/filter',
@@ -108,10 +109,9 @@ router.post(
     try {
       const organService = new OrganService(req)
       const response = await organService.filterOrgan(
+        res.locals.user.id,
         req.body.distance,
-        req.body.organType,
-        req.body.bloodGroup,
-        res.locals.user.id
+        req.body.organType
       )
       if (!response) {
         console.log('Organ can not fetch according filters')
@@ -123,22 +123,22 @@ router.post(
   }
 )
 
-router.delete(
-  '/one/:id',
-  async (
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) => {
-    try {
-      const organService = new OrganService(req)
-      const organId = req.params.id
-      const organDonationResponse = await organService.deleteOrganById(organId)
-      res.status(organDonationResponse.status).send(organDonationResponse.data)
-    } catch (err) {
-      return next(err)
-    }
-  }
-)
+// router.delete(
+//   '/one/:id',
+//   async (
+//     req: express.Request,
+//     res: express.Response,
+//     next: express.NextFunction
+//   ) => {
+//     try {
+//       const organService = new OrganService(req)
+//       const organId = req.params.id
+//       const organDonationResponse = await organService.deleteOrganById(organId)
+//       res.status(organDonationResponse.status).send(organDonationResponse.data)
+//     } catch (err) {
+//       return next(err)
+//     }
+//   }
+// )
 
 export const organRouter = router

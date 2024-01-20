@@ -1,8 +1,43 @@
 import { SignUpForm } from "@/components/SignUpForm";
 import AuthNav from "@/components/authNav";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 const Signup = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("Lat") == undefined || localStorage.getItem("Long") == undefined) {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords.latitude;
+            const long = position.coords.longitude;
+
+            localStorage.setItem("Lat", String(lat));
+            localStorage.setItem("Long", String(long));
+
+            console.log(lat, long)
+            console.log("position: ", position);
+          }, (error) => {
+            switch (error.code) {
+              case error.PERMISSION_DENIED:
+                console.error("User denied the request for location access.");
+                break;
+              case error.POSITION_UNAVAILABLE:
+                console.error("Location information is unavailable.");
+                break;
+              case error.TIMEOUT:
+                console.error("The request to get user location timed out.");
+                break;
+              default:
+                console.error("Error:", error.message);
+            }
+          }
+        )
+      }
+    }
+  }, [])
+  
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center bg-background gap-y-8 md:overflow-y-hidden overflow-y-scroll">
       <AuthNav />
