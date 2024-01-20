@@ -203,9 +203,9 @@ export default function Dashboard() {
             </Menubar>
           </div>
         </div>
-        <div className="">
+        <div className="mt-10">
           {organs.length > 0 ? (
-            <div className="">
+            <div className="flex flex-wrap gap-4">
               {organs.map((organ) => (
                 <div className="flex gap-x-4">
                   <OrganCard
