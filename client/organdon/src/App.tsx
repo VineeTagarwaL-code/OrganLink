@@ -7,6 +7,7 @@ import Admin from "./pages/admin";
 import MyOrgans from "./components/MyOrgans";
 import Announcement from "./pages/Announcement";
 
+
 import OpenRoute from "./routes/OpenRoute";
 import PrivateRoute from "./routes/ProtectedRoute";
 
@@ -14,6 +15,7 @@ function App() {
   return (
     <div className=" overflow-hidden">
       <Routes>
+
       <Route path="/announcement" element={<Announcement />} />
 
       <Route path="/admin" element={
@@ -53,6 +55,7 @@ function App() {
             </PrivateRoute>
           }
         />
+
       </Routes>
     </div>
   );
