@@ -77,7 +77,7 @@ const OrganCard = ({
 
   return (
     <div>
-      <Card className="overflow-y-scroll bg-[#1F2937] text-whit rounded-xl w-96 p-5 items-center flex flex-col hover:bg-white hover:text-black font-serif">
+      <Card className="bg-[#1F2937] text-white rounded-xl w-96 p-5 items-center flex flex-col hover:bg-white hover:text-black font-serif">
         <div className="flex justify-between w-full">
           <div className="flex gap-x-4 items-center">
             <Avatar className="bg-red">
@@ -114,16 +114,13 @@ const OrganCard = ({
 
             {showEdit && (
               <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <div className="flex items-center justify-center rounded-xl bg-red-500  p-3">
-                    <PiDotsThreeOutlineVerticalFill />
-                  </div>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem>Update</DropdownMenuItem>
-                  <DropdownMenuItem>Unlist</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <DropdownMenuTrigger><PiDotsThreeOutlineVerticalFill/></DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>Update</DropdownMenuItem>
+                <DropdownMenuItem>Unlist</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            
             )}
           </div>
         </div>

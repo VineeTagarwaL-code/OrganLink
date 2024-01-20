@@ -42,12 +42,8 @@ const Signup = () => {
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center bg-background gap-y-8 md:overflow-y-hidden overflow-y-scroll">
       <AuthNav />
-<<<<<<< Updated upstream
-      <div className="w-[70%] flex items-center justify-evenly pl-10">
-=======
       <Toaster />
       <div className="w-[70%] flex items-center justify-evenly lg:ml-32 mt-32">
->>>>>>> Stashed changes
         <div className="flex items-center justify-center flex-col gap-10">
           <h2 className="text-white text-4xl">
             Signup To <span className="text-[#ed5757]">OrganDon</span>

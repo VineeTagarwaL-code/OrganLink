@@ -69,7 +69,7 @@ export default function MyOrgans() {
         />
       </div>
       {/* cards */}
-      <div id="1" className="md:ml-80">
+      <div className="md:ml-80">
         {organs.length > 0 ? (
           <div className="flex flex-wrap gap-y-8 mr-14 ml-8 mt-8  justify-between">
             {organs.map((organ) => (

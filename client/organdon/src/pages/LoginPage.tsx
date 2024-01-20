@@ -8,14 +8,9 @@ export default function Login() {
   return (
     <div className="w-screen h-screen  bg-background flex  items-center justify-center md:overflow-y-hidden overflow-y-scroll">
       <AuthNav />
-<<<<<<< Updated upstream
-      <div className="flex items-center justify-evenly w-[65%] ">
-        <div>
-=======
       <Toaster />
       <div className="flex items-center justify-evenly w-[55%]  ">
         <div className="hidden lg:block">
->>>>>>> Stashed changes
           <svg
             data-name="Layer 1"
             xmlns="http://www.w3.org/2000/svg"

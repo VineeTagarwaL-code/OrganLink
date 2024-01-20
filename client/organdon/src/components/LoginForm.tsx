@@ -20,14 +20,9 @@ import { apiConnector } from "@/services/apiconnector";
 import { authEndpoints } from "@/services/apis";
 import { setUser } from "@/utils/slices/profileSlices";
 import { setToken } from "@/utils/slices/authSlice";
-<<<<<<< Updated upstream
-
-=======
-import { useEffect } from "react";
 import wait from "@/utils/wait";
 import { toast } from "sonner";
 import { ReloadIcon } from "@radix-ui/react-icons";
->>>>>>> Stashed changes
 export function LoginForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const institutionsForm = useForm<z.infer<typeof LoginSchema>>({
@@ -63,13 +58,8 @@ export function LoginForm() {
     }
   };
 
-<<<<<<< Updated upstream
-=======
-  useEffect(() => {
-    console.log("user: -------------> ", user);
-  }, [user]);
 
->>>>>>> Stashed changes
+
   return (
     <Form {...institutionsForm}>
       <form
