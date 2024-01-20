@@ -26,6 +26,16 @@ function App() {
             </PrivateRoute>
           }
         />
+
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <Login />
+            </PrivateRoute>
+          }
+        />
+
         <Route
           path="/signup"
           element={

@@ -82,10 +82,6 @@ export function SignUpForm() {
     }
   }
 
-  useEffect(() => {
-    console.log("user: -------------> ", user);
-  }, [user]);
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">

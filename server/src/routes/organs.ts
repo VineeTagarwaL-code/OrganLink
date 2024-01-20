@@ -98,24 +98,6 @@ router.get(
   }
 )
 
-// router.get(
-//   '/one/:id',
-//   async (
-//     req: express.Request,
-//     res: express.Response,
-//     next: express.NextFunction
-//   ) => {
-//     try {
-//       console.log('check check chekc ')
-//       const organService = new OrganService(req)
-//       const organId = req.params.id
-//       const organDonationResponse = await organService.getOrganById(organId)
-//       res.status(organDonationResponse.status).send(organDonationResponse.data)
-//     } catch (err) {
-//       return next(err)
-//     }
-//   }
-// )
 
 router.post(
   '/filter',
@@ -140,23 +122,5 @@ router.post(
     }
   }
 )
-
-// router.delete(
-//   '/one/:id',
-//   async (
-//     req: express.Request,
-//     res: express.Response,
-//     next: express.NextFunction
-//   ) => {
-//     try {
-//       const organService = new OrganService(req)
-//       const organId = req.params.id
-//       const organDonationResponse = await organService.deleteOrganById(organId)
-//       res.status(organDonationResponse.status).send(organDonationResponse.data)
-//     } catch (err) {
-//       return next(err)
-//     }
-//   }
-// )
 
 export const organRouter = router

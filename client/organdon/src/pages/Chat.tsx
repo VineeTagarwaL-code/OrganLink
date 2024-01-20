@@ -150,19 +150,19 @@ const Chat = () => {
       <div className="w-72 h-screen fixed">
         <Sidebar />
       </div>
-      <div className="ml-72 flex overflow-y-auto w-screen  flex-col bg-white ">
-        <div className="flex items-center fixed top-0 h-1/12  w-full p-4 bg-red-600">
-          <div className="   text-black">
+      <div className="ml-72  flex overflow-y-auto w-screen  flex-col bg-white ">
+        <div className="flex z-50 items-center fixed top-0 h-1/12 w-full p-4 bg-red-200 shadow-2xl">
+          <div className="text-black">
             <Avatar className="bg-red-600">
               <AvatarFallback className="bg-red-400">
                 {interactingUserName && interactingUserName[0].toUpperCase()}
               </AvatarFallback>
             </Avatar>
           </div>
-          <div className="p-4 rounded-xl text-black">{interactingUserName}</div>
+          <div className="p-4  rounded-xl text-black">{interactingUserName}</div>
         </div>
 
-        <div className="my-40 p-4 h-screen mb-40 flex flex-col-reverse justify-end">
+        <div className="my-40 z-20  p-4 h-screen mb-40 flex flex-col-reverse justify-end">
           {messages.map((message) => (
             <div
               key={message._id}
@@ -227,8 +227,8 @@ const Chat = () => {
           ))}
         </div>
 
-        <div className="fixed bottom-0 flex items-center w-screen bg-gray-200 rounded-xl">
-          <span className="flex w-3/4">
+        <div className="fixed z-50 bottom-0  flex justify-between items-center w-screen bg-gray-200 rounded-xl">
+          <div className="flex w-full pr-8">
             <textarea
               className=" p-2 py-4 bg-gray-200 h-auto w-3/4 text-black"
               placeholder="Enter your message here"
@@ -256,7 +256,7 @@ const Chat = () => {
             <button className=" p-3" onClick={handleMessageSend}>
               <AiOutlineSend color="black" className="" size="30px" />
             </button>
-          </span>
+          </div>
         </div>
       </div>
     </div>

@@ -114,20 +114,19 @@ const OrganCard = ({
 
             {showEdit && (
               <DropdownMenu>
-                <DropdownMenuTrigger className="border border-pink-400">
+                <DropdownMenuTrigger className="">
                   <PiDotsThreeOutlineVerticalFill />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-[#0E1522] border border-white/20 pt-2">
-                  <DropdownMenuItem>Update</DropdownMenuItem>
+                <DropdownMenuContent className="bg-[#0E1522] p-2 border border-white/20 pt-2 hover:text-pink-300">
                   <DropdownMenuItem>Unlist</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             )}
 
             {!showEdit && (
-              <div className="bg-green-400 mx-2 p-2 rounded-xl">
+              <div className=" bg-green-400 opacity-65 mx-2 p-1 rounded-xl">
                 <button
-                  className="w-full rounded-xl text-black p-2"
+                  className="w-full rounded-xl text-white text-border font-extrabold font p-2"
                   onClick={handleChat}
                 >
                   Chat

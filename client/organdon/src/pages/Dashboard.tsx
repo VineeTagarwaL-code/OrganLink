@@ -1,7 +1,5 @@
 import Sidebar from "../components/Sidebar";
-import { FiSearch } from "react-icons/fi";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Input } from "../components/ui/input";
 import { IoFilterSharp } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import {
@@ -97,7 +95,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="h-screen bg-[#111827] w-screen">
+    <div className="h-screen bg-[#111827] w-screen  overflow-y-auto">
       <div className="hidden border-r border-slate-700 h-full md:flex md:w-72 md:flex-col md:fixed md:inset-y-0 z-[80] bg-[#0e1522]">
         <Sidebar />
       </div>
@@ -113,13 +111,13 @@ export default function Dashboard() {
             </SheetContent>
           </Sheet>
         </div>
-        <div className="absolute inset-y-0 left-0 pl-16 flex items-center pointer-events-none">
+        {/* <div className="fixed inset-y-0 left-0 pl-16 flex items-center pointer-events-none">
           <FiSearch className="text-gray-400 text-2xl" />
         </div>
         <Input
           placeholder="Search Organs by name"
           className="block w-full h-20 pl-24 pr-4 py-2 rounded-md focus:border bg-transparent"
-        />
+        /> */}
       </div>
       {/* cards */}
       <div className="md:ml-80 mr-14">
