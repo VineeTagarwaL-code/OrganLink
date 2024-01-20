@@ -35,7 +35,7 @@ export default function MyOrgans() {
 
   const fetchOrgans = async() => {
     const response = await apiConnector("GET", userEndpoints.GET_INSTITUTE_ORGANS, null, {
-      Authorization: `Bearer ${token}`
+      'x-access-token': `Bearer ${token}`
     })
     console.log("response after get all institue organs: ", response);
     setOrgans(response?.data as OrganTypes[]);

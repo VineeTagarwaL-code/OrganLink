@@ -21,11 +21,9 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useState } from "react";
 
 export default function Dashboard() {
-  const [bloodGroup, setBloodGroup] = useState("");
   const [organType, setOrganType] = useState("");
   const [distance, setDistance] = useState(false);
 
-  const bloodGroupOption = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
   const organTypeOption = ["Heart", "Liver", "Kidney", "Lungs"];
   const side = "left";
   return (
@@ -65,17 +63,6 @@ export default function Dashboard() {
                 <div
                   className="text-lg font-bold text-black hover:bg-white transition-all duration-200 p-1 rounded-full"
                   onClick={() => setDistance(false)}
-                >
-                  <RxCross2 />
-                </div>
-              </div>
-            )}
-            {bloodGroup && (
-              <div className="flex gap-x-4 items-center justify-center rounded-full pt-2 pb-2 pl-4 pr-4 bg-[#BC0B66]">
-                Blood group {bloodGroup}
-                <div
-                  className="text-lg font-bold text-black hover:bg-white transition-all duration-200 p-1 rounded-full"
-                  onClick={() => setBloodGroup("")}
                 >
                   <RxCross2 />
                 </div>
@@ -126,24 +113,6 @@ export default function Dashboard() {
                     </MenubarSubContent>
                   </MenubarSub>
                   <MenubarSeparator />
-                  <MenubarSub>
-                    <MenubarSubTrigger>Blood group</MenubarSubTrigger>
-                    <MenubarSubContent>
-                      {bloodGroupOption.map((blood) => {
-                        return (
-                          <div className="">
-                            <MenubarItem
-                              key={blood}
-                              onClick={() => setBloodGroup(blood)}
-                            >
-                              {blood}
-                            </MenubarItem>
-                            <MenubarSeparator />
-                          </div>
-                        );
-                      })}
-                    </MenubarSubContent>
-                  </MenubarSub>
                 </MenubarContent>
               </MenubarMenu>
             </Menubar>

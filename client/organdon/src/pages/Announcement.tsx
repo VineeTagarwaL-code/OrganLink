@@ -16,7 +16,7 @@ interface Announcement {
 
 export default function Announcement() {
   const [announcement, setAnnouncement] = useState<Announcement[]>([]);
-  const [announcementText, setAnnouncementText] = useState<string>("");
+  const [announcementText, setAnnouncementText] = useState<string>(""); 
   const { token } = useSelector((state: RootState) => state.auth);
   const { user } = useSelector((state: RootState) => state.profile);
 
