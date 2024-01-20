@@ -4,14 +4,19 @@ import Login from "./pages/LoginPage";
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/admin";
+import MyOrgans from "./components/MyOrgans";
+
+
 function App() {
   return (
-    <div className="">
+    <div className=" overflow-hidden">
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/dashboard" element={<Dashboard/>}/>
+        <Route path="/myorgans" element={<MyOrgans/>}/>
       </Routes>
     </div>
   );

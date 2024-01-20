@@ -11,20 +11,6 @@ const organSchema = new Schema(
       required: true,
       ref: 'User',
     },
-    bloodGroup: {
-      type: String,
-      required: true,
-    },
-    condition: {
-      type: String,
-      required: true,
-    },
-    certification: {
-      type: [String],
-    },
-    isDeleted: {
-      type: Boolean,
-    },
     lat: {
       type: Number,
       required: true,

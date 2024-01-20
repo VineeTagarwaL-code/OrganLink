@@ -7,6 +7,7 @@ import { App as appConfig } from './config/appConfig'
 import { userRouter } from './routes/users'
 import { verifyToken } from './middleware/verifyToken'
 import { organRouter } from './routes/organs'
+import { messageRouter } from './routes/messages'
 import { fileRouter } from './routes/files'
 import { adminRouter } from './routes/admin'
 import { verifyIsAdmin } from './middleware/verifyIsAdmin'
@@ -25,7 +26,11 @@ app.use(verifyToken)
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/organs', organRouter)
 app.use('/api/v1/files', fileRouter)
+
 app.use('/api/v1/admin', verifyIsAdmin, adminRouter)
+
+app.use('/api/v1/messages', messageRouter)
+
 
 // Error handler middleware
 app.use(
