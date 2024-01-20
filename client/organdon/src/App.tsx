@@ -7,17 +7,55 @@ import Admin from "./pages/admin";
 import MyOrgans from "./components/MyOrgans";
 import Announcement from "./pages/Announcement";
 
+
+import OpenRoute from "./routes/OpenRoute";
+import PrivateRoute from "./routes/ProtectedRoute";
+
 function App() {
   return (
     <div className=" overflow-hidden">
       <Routes>
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/announcement" element={<Announcement />} />
-        <Route path="/myorgans" element={<MyOrgans />} />
-        <Route path="/admin" element={<Admin />} />
+
+      <Route path="/announcement" element={<Announcement />} />
+
+      <Route path="/admin" element={
+        <PrivateRoute>
+          <Admin />
+        </PrivateRoute>
+      } />
+        <Route
+          path="/signup"
+          element={
+            <OpenRoute>
+              <Signup />
+            </OpenRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <OpenRoute>
+              <Login />
+            </OpenRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/myorgans"
+          element={
+            <PrivateRoute>
+              <MyOrgans />
+            </PrivateRoute>
+          }
+        />
+
       </Routes>
     </div>
   );

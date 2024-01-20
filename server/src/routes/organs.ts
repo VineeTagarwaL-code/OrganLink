@@ -70,7 +70,8 @@ router.get(
     next: express.NextFunction
   ) => {
     try {
-      const organService = new OrganService(req)
+      const organService = new OrganService(req);
+      console.log("Before organ donation:--------------------> ");
       const organDonationResponse = await organService.getAllOrgans()
       res.status(organDonationResponse.status).send(organDonationResponse.data)
     } catch (err) {

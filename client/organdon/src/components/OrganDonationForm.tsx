@@ -18,16 +18,11 @@ import { RootState } from "@/utils/store";
 import { OrganDonationFormSchema } from "@/schema/OrganDonationFormSchema";
 import { apiConnector } from "@/services/apiconnector";
 import { userEndpoints } from "@/services/apis";
-import { useEffect } from "react";
 
 export function OrganDonationForm() {
   const { token } = useSelector((state: RootState) => state.auth);
   const { user } = useSelector((state: RootState) => state.profile);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log("token: ", token);
-  }, [token]);
 
   const organDonationForm = useForm<z.infer<typeof OrganDonationFormSchema>>({
     resolver: zodResolver(OrganDonationFormSchema),

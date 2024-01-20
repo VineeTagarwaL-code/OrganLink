@@ -79,6 +79,7 @@ export class OrganService {
 
   public async getAllOrgans() {
     const allOrgans = await Organ.find({ isDeleted: false })
+    console.log("all organs: --------------------------> ", allOrgans);
     return { status: 200, data: allOrgans }
   }
 }

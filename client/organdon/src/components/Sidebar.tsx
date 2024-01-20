@@ -7,15 +7,17 @@ import { Avatar, AvatarFallback } from "./ui/avatar";
 import { TfiAnnouncement } from "react-icons/tfi";
 import { useSelector } from "react-redux";
 import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
 } from "./ui/dialog";
 import { RootState } from "@/utils/store";
 import { OrganDonationForm } from "./OrganDonationForm";
+import LogoutModal from "./Logout";
 
 export default function Sidebar() {
   const { user } = useSelector((state: RootState) => state.profile);
@@ -93,7 +95,22 @@ export default function Sidebar() {
             className={`flex items-center p-3 gap-x-2 text-zinc-400  font-bold text-lg hover:bg-[#1F2937] hover:text-[white] w-full h-10 rounded-[8px] cursor-pointer`}
           >
             <FiLogOut />
-            <p>Log Out</p>
+            <Dialog>
+                            <DialogTrigger asChild className="">
+                                <p className="mb-1">Log out</p>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-md ">
+                                <DialogHeader>
+                                    <DialogTitle className="mb-1 font-extrabold text-red-600 text-2xl">Are you sure ?</DialogTitle>
+                                    <DialogDescription className="text-lg font-medium text-gray-500">
+                                        If you log out, you can't list organs or serch organs
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <LogoutModal/>
+                                <DialogFooter className="sm:justify-center">
+                                </DialogFooter>
+                            </DialogContent>
+                        </Dialog>
           </div>
         </div>
       </div>
