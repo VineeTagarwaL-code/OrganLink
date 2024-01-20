@@ -11,7 +11,7 @@ import { messageRouter } from './routes/messages'
 import { fileRouter } from './routes/files'
 import { adminRouter } from './routes/admin'
 import { verifyIsAdmin } from './middleware/verifyIsAdmin'
-
+import { announcementRouter } from './routes/announcements'
 
 const app = express()
 app.use(cors())
@@ -30,6 +30,7 @@ app.use('/api/v1/files', fileRouter)
 app.use('/api/v1/admin', verifyIsAdmin, adminRouter)
 
 app.use('/api/v1/messages', messageRouter)
+app.use('/api/v1/announcements', announcementRouter)
 
 
 // Error handler middleware
