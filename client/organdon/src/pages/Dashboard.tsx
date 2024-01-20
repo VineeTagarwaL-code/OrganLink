@@ -68,10 +68,6 @@ export default function Dashboard() {
                 </div>
               </div>
             )}
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
             {organType && (
               <div className="flex gap-x-4 items-center justify-center rounded-full pt-2 pb-2 pl-4 pr-4 bg-[#BC0B66]">
                 Organ type {organType}

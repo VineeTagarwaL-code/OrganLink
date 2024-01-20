@@ -29,12 +29,6 @@ export default function MyOrgans() {
     fetchOrgans();
   }, []);
 
-<<<<<<< Updated upstream
-  const fetchOrgans = async() => {
-    const response = await apiConnector("GET", userEndpoints.GET_INSTITUTE_ORGANS, null, {
-      'x-access-token': `Bearer ${token}`
-    })
-=======
   const fetchOrgans = async () => {
     const response = await apiConnector(
       "GET",
@@ -44,7 +38,6 @@ export default function MyOrgans() {
         "x-access-token": `Bearer ${token}`,
       }
     );
->>>>>>> Stashed changes
     console.log("response after get all institue organs: ", response);
     setOrgans(response?.data as OrganTypes[]);
   };
