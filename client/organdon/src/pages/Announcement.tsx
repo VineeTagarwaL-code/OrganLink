@@ -72,7 +72,7 @@ export default function Announcement() {
       <div className="hidden border-r border-slate-700 h-full md:flex md:w-72 md:flex-col md:fixed md:inset-y-0 z-[80] bg-[#0e1522]">
         <Sidebar />
       </div>
-      <div className="flex flex-col justify-between border border-red-600 h-full ml-72 ">
+      <div className="flex flex-col justify-between h-full ml-72 ">
         <div>
           <div className="border p-4 m-4 text-center rounded-lg font-bold text-2xl border-slate-700">
             Announcements
@@ -89,7 +89,7 @@ export default function Announcement() {
               ))}
             </div>
           ) : (
-            <div>No announcments yet</div>
+            <div className="p-6 ">No announcments yet</div>
           )}
         </div>
         <div className="bg-white text-black flex items-center justify-between">
